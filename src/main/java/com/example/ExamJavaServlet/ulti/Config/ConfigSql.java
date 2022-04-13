@@ -1,20 +1,13 @@
 package com.example.ExamJavaServlet.ulti.Config;
 
 public class ConfigSql {
-    //foods
-    public static final String FOODS_INSERT = "insert into foods (name,categoryId,description,thumbnail,price,createdAt,updatedAt,status ) values ( ?,?,?,?,?,?,?,?)";
-    public static final String FOODS_SELECT = "select * from foods";
-    public static final String FOODS_SELECT2 = "select * from foods where id = ?";
-    public static final String FOODS_UPDATE = "update foods set name = ?,categoryId = ?,description = ?,thumbnail = ?,price = ?,createdAt = ?,updatedAt = ?,status = ? where id = ?";
-    public static final String FOODS_DELETE = "delete from foods where id = ?";
+    public static final String DATEBASE_PRODUCT_INSERT = "insert into tbProducts ( name, price, amount, details ) values ( ?,?,?,?)";
+    public static final String DATABASE_PRODUCT_SELECT = "select * from tbProducts";
+    public static final String DATABASE_PRODUCT_SELECT2 = "select * from tbProducts where id = ?";
+    public static final String DATABASE_PRODUCT_UPDATE = "update tbProducts set name = ?, price = ?, amount = ?, details = ? where id = ?";
+    public static final String DATABASE_PRODUCT_DELETE = "delete from tbProducts where id = ?";
 
-    //category
-    public static final String CATEGORIES_INSERT = "insert into categories ( categoryName, status) values (?,?)";
-    public static final String CATEGORIES_SELECT = "select * from categories";
-    public static final String CATEGORIES_SELECT2 = "select * from  categories where id = ?";
-    public static final String CATEGORIES_UPDATE = " update categories set categoryName = ?, status = ? where id = ?";
-    public static final String CATEGORIES_DELETE = "delete from categories where id = ?";
-
+    public static final String SELECT_ACCOUNT_BY_USERNAME = "select * from tbUser where username=?" ;
 
     public static final String INSERT = "INSERT INTO";
     public static final String ALTER_TABLE = "ALTER TABLE";
@@ -53,6 +46,5 @@ public class ConfigSql {
     public static final String TABLE_SCHEMA = "table_schema";
     public static final String TABLE_NAME = "table_name";
     public static final String LIMIT = "LIMIT";
-    public static final String SELECT_ACCOUNT_BY_USERNAME = "select * from accounts where username=?" ;
     public static final String LOCK_ACCOUNT = "update accounts set status=?,failureCount = ?,lockTime=? where username = ?" ;
 }

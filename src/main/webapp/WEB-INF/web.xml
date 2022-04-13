@@ -3,4 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <servlet>
+        <servlet-name>GetListProductServlet</servlet-name>
+        <servlet-class>com.example.ExamJavaServlet.controller.product.GetListProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetListProductServlet</servlet-name>
+        <url-pattern>/products/list</url-pattern>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
