@@ -23,7 +23,7 @@ public class UserFilter implements Filter {
         HttpSession session = request.getSession();
         tbUser account = (tbUser) session.getAttribute("currentAccount");
         if (account == null){
-            response.sendRedirect("/accounts/login");
+            response.sendRedirect("/user/login");
         }else {
             System.out.println("Current account: " + account.getUsername());
             filterChain.doFilter(servletRequest, servletResponse);
