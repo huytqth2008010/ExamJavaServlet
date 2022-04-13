@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class LoginServlet extends HttpServlet {
+    private UserModel accountModel = new UserModel();
+
+    private static final int MAX_COUNT = 5;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,27 +23,25 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserModel model = new UserModel();
         String username = req.getParameter("username");
-        String password =req.getParameter("password");
-        if (username==null){
-            req.setAttribute("errorsLog","Invalid username");
-            req.getRequestDispatcher("/user/login.jsp").forward(req,resp);
-            return;
-        }
-        tbUser user= model.findAccountByUsername(username);
+        String password = req.getParameter("password");
+        tbUser user = accountModel.findAccountByUsername(username);
         if (user == null){
-            req.setAttribute("errorsLog","Not found username");
-            req.getRequestDispatcher("/user/login.jsp").forward(req,resp);
-            return;
-
-        }
-        if (!user.getPassword().contains(password)){
-            req.setAttribute("errorsLog","Invalid information");
-            req.getRequestDispatcher("/user/login.jsp").forward(req,resp);
+//            resp.getWriter().println("Invalid Information");
+            resp.sendRedirect("/login");
             return;
         }
-        req.getSession().setAttribute("currentUser",user);
-        resp.sendRedirect("/products");
+        boolean result = checkPassword(password, user.getPassword());
+        if (result){
+            HttpSession session = req.getSession();
+            session.setAttribute("currentUser", user);
+            resp.sendRedirect("/products");
+        }else {
+            resp.getWriter().println("Account is not valid!");
+            resp.sendRedirect("/user/login");
+        }
+    }
+    public static boolean checkPassword(String password, String passwordDatabase) {
+        return password.equals(passwordDatabase);
     }
 }

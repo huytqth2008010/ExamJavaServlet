@@ -14,7 +14,6 @@ import java.time.format.DateTimeParseException;
 
 public class UserModel {
     public tbUser findAccountByUsername(String username) {
-        tbUser obj = null;
         try {
             Connection connection = ConnectionHelper.getConnection();
             PreparedStatement preparedStatement =
@@ -25,12 +24,18 @@ public class UserModel {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String usernameDatabase = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                obj = new tbUser(usernameDatabase, password);
+                String passwordDatabase = resultSet.getString("password");
+                tbUser user = new tbUser();
+
+                user.setUsername(usernameDatabase);
+                user.setPassword(passwordDatabase);
+                return user;
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
 }
