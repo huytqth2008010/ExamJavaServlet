@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         tbUser user= model.findAccountByUsername(username);
-        if (user==null){
+        if (user == null){
             req.setAttribute("errorsLog","Not found username");
             req.getRequestDispatcher("/user/login.jsp").forward(req,resp);
             return;
