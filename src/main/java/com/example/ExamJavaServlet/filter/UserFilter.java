@@ -21,7 +21,7 @@ public class UserFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        tbUser account = (tbUser) session.getAttribute("currentAccount");
+        tbUser account = (tbUser) session.getAttribute("currentUser");
         if (account == null){
             response.sendRedirect("/user/login");
         }else {
