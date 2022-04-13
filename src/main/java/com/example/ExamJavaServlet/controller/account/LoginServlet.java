@@ -25,10 +25,16 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        if (username == null){
+            req.setAttribute("errorsLog","Invalid username");
+            req.getRequestDispatcher("/user/login.jsp").forward(req,resp);
+            return;
+        }
+
         tbUser user = accountModel.findAccountByUsername(username);
         if (user == null){
-//            resp.getWriter().println("Invalid Information");
-            resp.sendRedirect("/login");
+            req.setAttribute("errorsLog","Invalid Information");
+            resp.sendRedirect("/user/login");
             return;
         }
         boolean result = checkPassword(password, user.getPassword());
